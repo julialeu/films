@@ -1,0 +1,8 @@
+body {
+    padding: 20px;
+}
+
+#film-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
