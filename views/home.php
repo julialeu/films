@@ -1,25 +1,23 @@
 <div class="container">
-    <h1>Films</h1>
+    <h1 class="text-center">Films</h1>
     <div class="row">
-        <!-- Columna con la lista de películas -->
-        <div class="col-md-4">
-            <ul id="film-list" class="list-group">
-                <?php foreach ($films as $film): ?>
-                    <li 
-                        class="list-group-item film-item" 
-                        data-id="<?php echo $film['id']; ?>"
-                        style="cursor:pointer;"
-                    >
-                        <?php echo htmlspecialchars($film['title'], ENT_QUOTES, 'UTF-8'); ?>
-                    </li>
-                <?php endforeach; ?>
+        <div class="col-md-offset-4 col-md-4">
+            <ul id="film-list" class="list-group text-center">
+                <?php if (!empty($films)): ?>
+                    <?php foreach ($films as $film): ?>
+                        <li class="list-group-item">
+                            <!-- Título de la película -->
+                            <span><?php echo htmlspecialchars($film['title'], ENT_QUOTES, 'UTF-8'); ?></span>
+                            <!-- Ícono de ojo para mostrar detalles -->
+                            <span class="film-item" data-id="<?php echo htmlspecialchars($film['id'], ENT_QUOTES, 'UTF-8'); ?>">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            </span>
+                        </li>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <li class="list-group-item">No se encontraron películas.</li>
+                <?php endif; ?>
             </ul>
-        </div>
-        <!-- Columna donde se mostrarán los detalles -->
-        <div class="col-md-8">
-            <div id="film-details">
-                <!-- Aquí se inyectarán los detalles via AJAX -->
-            </div>
         </div>
     </div>
 </div>
