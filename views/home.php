@@ -8,9 +8,7 @@
                 <?php if (!empty($films)): ?>
                     <?php foreach ($films as $film): ?>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <!-- Título de la película -->
                             <span><?php echo htmlspecialchars($film['title'], ENT_QUOTES, 'UTF-8'); ?></span>
-                            <!-- Ícono de información -->
                             <span class="film-item" 
                                   data-id="<?php echo htmlspecialchars($film['id'], ENT_QUOTES, 'UTF-8'); ?>"
                                   aria-label="More info about <?php echo htmlspecialchars($film['title'], ENT_QUOTES, 'UTF-8'); ?>"
@@ -20,7 +18,7 @@
                         </li>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <li class="list-group-item text-center">No se encontraron películas.</li>
+                    <li class="list-group-item text-center">Films not found.</li>
                 <?php endif; ?>
             </ul>
         </div>

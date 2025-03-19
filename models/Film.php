@@ -3,15 +3,15 @@ class Film {
     private $conn;
 
     public function __construct($dbHost, $dbName, $dbUser, $dbPass) {
-        // Conexión con PDO
+        // connection to the database
         $dsn = "mysql:host=$dbHost;dbname=$dbName;charset=utf8";
         $this->conn = new PDO($dsn, $dbUser, $dbPass);
-        // Opcionalmente, puedes configurar atributos de PDO para manejo de errores, etc.
+        // handle error
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     /**
-     * Devuelve todos los films, solo id y título.
+     * Get all films from the database
      */
     public function getAllFilms() {
         $stmt = $this->conn->query("SELECT id, title FROM f_film ORDER BY title ASC");
@@ -19,7 +19,7 @@ class Film {
     }
 
     /**
-     * Devuelve los detalles de un film, uniendo la tabla de imágenes.
+     * query to get film details
      */
     public function getFilmDetails($id) {
         $sql = "SELECT f_film.id, f_film.title, f_film.rating, f_film.year, f_image.image_url

@@ -1,0 +1,118 @@
+Este proyecto es una aplicación sencilla para listar películas y mostrar sus detalles.
+Se ha desarrollado en PHP, usando una estructura MVC básica (Modelo, Vista, Controlador) y se despliega localmente usando XAMPP. 
+A continuación, se describen los pasos para poner en funcionamiento la aplicación, su estructura y el rol de cada archivo.
+
+1. Requisitos
+XAMPP (o cualquier otro servidor web con PHP y MySQL).
+PHP 7 o superior.
+MySQL (incluido en XAMPP).
+Navegador web moderno.
+
+2. Preparación del entorno
+Clona o descarga este repositorio y colócalo en la carpeta htdocs de XAMPP.
+Inicia los servicios de Apache y MySQL desde el Panel de Control de XAMPP.
+
+Crea la base de datos necesaria:
+
+Entra en http://localhost/phpmyadmin.
+Crea una base de datos llamada films.
+Importa el archivo films.sql que se encuentra en la carpeta db_dump. Este archivo contiene la estructura de tablas y datos de ejemplo.
+Configura la conexión a la base de datos.
+Dentro de controllers/FilmController.php, en el constructor, se definen las variables:
+
+php
+Copiar código
+$dbHost = 'localhost';
+$dbName = 'films';
+$dbUser = 'root';
+$dbPass = '';
+
+Estas variables deben ser reemplazadas con tus propias credenciales de acceso a la base de datos.
+
+3. Cómo ejecutar la aplicación
+Asegúrate de que el proyecto está en la carpeta htdocs y que la base de datos está configurada.
+
+Abre tu navegador y ve a la siguiente URL:
+
+
+http://localhost/films
+Si cambiaste el nombre de la carpeta o la ruta, ajusta la URL en consecuencia.
+
+Deberías ver una lista de películas. Haz click en info para ver los detalles de la película.
+
+4. Estructura del proyecto
+La carpeta principal se llama films e incluye las siguientes subcarpetas y archivos:
+
+films/
+├── controllers/
+│   └── FilmController.php
+├── css/
+│   └── home.css
+├── db_dump/
+│   └── films.sql
+├── documents/
+├── images/
+├── js/
+│   ├── ajax.js
+│   ├── events.js
+│   ├── home.js
+│   └── modal.js
+├── models/
+│   └── Film.php
+├── vendors/
+├── views/
+│   └── home.php
+├── index.php
+└── readme.txt
+
+
+4.1. controllers/
+FilmController.php:
+Es el controlador principal que se encarga de instanciar el modelo Film, conectarse a la base de datos y proveer métodos para obtener la lista de películas y los detalles de una película concreta
+4.2. css/
+home.css:
+Contiene estilos de la página principal y del spinner
+4.3. db_dump/
+films.sql:
+Archivo SQL que crea la base de datos films con tablas y datos de ejemplo.
+4.4. documents/
+Carpeta vacía en este momento.
+4.5. images/
+Vacía de momento
+4.6. js/
+Contiene la lógica del lado del cliente dividida en varios archivos JavaScript
+
+ajax.js
+
+Define la función fetchFilmDetails(filmId) que hace una petición AJAX (GET) a index.php con la acción details y el ID de la película.
+Retorna una promesa con la respuesta en formato JSON.
+events.js
+
+Importa la función fetchFilmDetails de ajax.js y las funciones de manejo de modales (showModal, updateModalContent) desde modal.js.
+Define bindFilmItemClicks(), que se encarga de asociar el evento click a cada elemento.
+home.js
+
+Archivo principal que se ejecuta cuando la página carga ($(document).ready(...)).
+Llama a bindFilmItemClicks() para enlazar la interacción de la lista de películas con el modal de detalles.
+modal.js
+
+Define funciones para mostrar y actualizar el contenido del modal:
+showModal(): Muestra el modal con un spinner de carga.
+updateModalContent(film): Muestra los detalles de la película en el modal (título, rating, año, imagen).
+loadImageWithSpinner(imageUrl): Carga la imagen asociada a la película y muestra un spinner mientras se completa la carga.
+
+4.7. models/
+Film.php:
+Clase que se encarga de la conexión a la base de datos mediante PDO.
+Proporciona métodos para obtener la lista de películas (getAllFilms()) y para obtener detalles de una película específica (getFilmDetails($id)).
+
+4.8. views/
+home.php:
+Vista principal que muestra la lista de películas.
+
+4.9. index.php
+Es el punto de entrada de la aplicación:
+Instancia el controlador FilmController.
+Verifica si se ha solicitado la acción details con un ID de película.
+Si es así, devuelve un JSON con los detalles de la película (usado por AJAX en el cliente).
+Si no se ha solicitado details, obtiene la lista de películas y las muestra a través de la vista home.php.

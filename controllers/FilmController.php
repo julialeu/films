@@ -5,13 +5,13 @@ class FilmController {
     private $film;
 
     public function __construct() {
-        // Configuración para la conexión a la base de datos.
+        // Database connection parameters
         $dbHost = 'localhost';
         $dbName = 'films';
         $dbUser = 'root';
         $dbPass = '';
 
-        // Se intenta crear la instancia del modelo y capturar cualquier excepción.
+        // Attempt to create the Film object
         try {
             $this->film = new Film($dbHost, $dbName, $dbUser, $dbPass);
         } catch (Exception $e) {
@@ -20,17 +20,17 @@ class FilmController {
         }
     }
 
-    // Método para obtener el listado de películas
+    // Method to get the list of films
     public function listFilms() {
         try {
             return $this->film->getAllFilms();
         } catch (Exception $e) {
             error_log("Error al obtener el listado de películas: " . $e->getMessage());
-            return []; // Retorna un array vacío en caso de error
+            return []; // Empty array in case of error
         }
     }
 
-    // Método para obtener los detalles de la película
+    // Method to get film details
     public function filmDetails($id) {
         try {
             // Verify that $id is an integer to prevent SQL injection
