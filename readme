@@ -30,13 +30,11 @@ Estas variables deben ser reemplazadas con tus propias credenciales de acceso a 
 
 3. Cómo ejecutar la aplicación
 Asegúrate de que el proyecto está en la carpeta htdocs y que la base de datos está configurada.
-
 Abre tu navegador y ve a la siguiente URL:
 
 
 http://localhost/films
 Si cambiaste el nombre de la carpeta o la ruta, ajusta la URL en consecuencia.
-
 Deberías ver una lista de películas. Haz click en info para ver los detalles de la película.
 
 4. Estructura del proyecto
@@ -68,33 +66,37 @@ films/
 4.1. controllers/
 FilmController.php:
 Es el controlador principal que se encarga de instanciar el modelo Film, conectarse a la base de datos y proveer métodos para obtener la lista de películas y los detalles de una película concreta
+
 4.2. css/
 home.css:
-Contiene estilos de la página principal y del spinner
+Contiene estilos de la página principal y del spinner.
+
 4.3. db_dump/
 films.sql:
 Archivo SQL que crea la base de datos films con tablas y datos de ejemplo.
+
 4.4. documents/
 Carpeta vacía en este momento.
+
 4.5. images/
 Vacía de momento
+
 4.6. js/
 Contiene la lógica del lado del cliente dividida en varios archivos JavaScript
 
 ajax.js
-
 Define la función fetchFilmDetails(filmId) que hace una petición AJAX (GET) a index.php con la acción details y el ID de la película.
 Retorna una promesa con la respuesta en formato JSON.
-events.js
 
+events.js
 Importa la función fetchFilmDetails de ajax.js y las funciones de manejo de modales (showModal, updateModalContent) desde modal.js.
 Define bindFilmItemClicks(), que se encarga de asociar el evento click a cada elemento.
-home.js
 
+home.js
 Archivo principal que se ejecuta cuando la página carga ($(document).ready(...)).
 Llama a bindFilmItemClicks() para enlazar la interacción de la lista de películas con el modal de detalles.
-modal.js
 
+modal.js
 Define funciones para mostrar y actualizar el contenido del modal:
 showModal(): Muestra el modal con un spinner de carga.
 updateModalContent(film): Muestra los detalles de la película en el modal (título, rating, año, imagen).
