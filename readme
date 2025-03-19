@@ -1,6 +1,5 @@
 Este proyecto es una aplicación sencilla para listar películas y mostrar sus detalles.
 Se ha desarrollado en PHP, usando una estructura MVC básica (Modelo, Vista, Controlador) y se despliega localmente usando XAMPP. 
-A continuación, se describen los pasos para poner en funcionamiento la aplicación, su estructura y el rol de cada archivo.
 
 1. Requisitos
 XAMPP (o cualquier otro servidor web con PHP y MySQL)
